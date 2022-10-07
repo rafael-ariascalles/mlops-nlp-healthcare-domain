@@ -1,0 +1,7 @@
+name: mlops-healthcare-domain
+dependencies:
+  - python==3.8
+  - conda
+  - pip
+  - pip:
+    - -r requirements.txt
