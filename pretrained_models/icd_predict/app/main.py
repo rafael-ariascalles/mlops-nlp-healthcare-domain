@@ -10,7 +10,7 @@ async def code_prediction(input_text: str = ''):
     
     model = ICD()
     prediction = model.predict(text=input_text)
-    return jsonß.dumps(str(prediction))
+    return json.dumps(str(prediction))
     
   
     #return StreamingResponse(io.BytesIO(png_img.tobytes()), media_type="image/png")
