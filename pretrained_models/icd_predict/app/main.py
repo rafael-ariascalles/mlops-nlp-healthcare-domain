@@ -13,8 +13,6 @@ async def code_prediction(input_text: str = ''):
     return json.dumps(str(prediction))
     
   
-    #return StreamingResponse(io.BytesIO(png_img.tobytes()), media_type="image/png")
-
 @app.get("/", tags=["Health Check"])
 async def root():
     return {"message": "Service is online."}
