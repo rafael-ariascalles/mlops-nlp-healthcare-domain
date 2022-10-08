@@ -1,5 +1,9 @@
 pandas 
 numpy
+tqdm
+ipywidgets
 tensorflow
 torch
 datasets
+transformers
+seqeval
