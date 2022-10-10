@@ -1,0 +1,10 @@
+pandas 
+numpy
+tqdm
+ipywidgets
+tensorflow
+torch
+datasets
+transformers
+datasets
+seqeval
