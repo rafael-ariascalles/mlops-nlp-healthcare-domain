@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from  icd import ICD
+from clean_icd_output import prediction_json
 import json
 
 app = FastAPI(title='ICD9 Code Prediction')
@@ -10,7 +11,9 @@ async def code_prediction(input_text: str = ''):
     
     model = ICD()
     prediction = model.predict(text=input_text)
-    return json.dumps(str(prediction))
+    prediction_cleaned = prediction_json(prediction)
+    
+    return(prediction_cleaned)
     
   
 @app.get("/", tags=["Health Check"])
