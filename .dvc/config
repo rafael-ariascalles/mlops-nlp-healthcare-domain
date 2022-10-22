@@ -1,4 +1,6 @@
 [core]
-    remote = bucket
+    remote = storage
 ['remote "bucket"']
     url = s3://nlp-medical-biller-group-datasets-mlo4/datasets/
+['remote "storage"']
+    url = s3://nlp-medical-biller-group-datasets-mlo4/
