@@ -8,7 +8,7 @@ def get_model():
     tokenizer.save_pretrained("models/")
     
     # save model for trinton server
-    torch.save(model_final.state_dict(), 'models/pytorch_model.pt')
+    torch.save(model.state_dict(), 'models/pytorch_model.pt')
 
 
 if __name__ == "__main__":
