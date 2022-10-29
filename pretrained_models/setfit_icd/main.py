@@ -9,7 +9,7 @@ app = FastAPI(title='Top 5 ICD Group Prediction')
 tokenizer_final = AutoTokenizer.from_pretrained("models/")
 model_final = AutoModelForSequenceClassification.from_pretrained("models/")
 
-service = pipeline("text-classification", model=model_final, tokenizer=tokenizer_final, return_all_scores=True, function_to_apply='none')
+service = pipeline("text-classification", model=model_final, tokenizer=tokenizer_final, return_all_scores=True, function_to_apply='softmax')
 
 class ServiceInput(BaseModel):
     clinical_note: str
