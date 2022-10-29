@@ -1,8 +1,8 @@
 version: '3' 
 
 services:
-  icd-class-service:
-    build: ../pretrained_models/icd_predict
+  icd-group-service:
+    build: ../pretrained_models/setfit_icd
     container_name: icd
     ports:
       - "8050:8000"
@@ -16,8 +16,8 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - URL_ICD_SERVICE=http://icd-class-service:8000/
+      - URL_ICD_SERVICE=http://icd-group-service:8000/
       - URl_DISEASE_SERVICE=http://disease-ner-service:8000/
     depends_on:
-      - icd-class-service
+      - icd-group-service
       - disease-ner-service

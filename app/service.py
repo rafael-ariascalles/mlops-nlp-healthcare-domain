@@ -11,5 +11,5 @@ async def healthcheck():
 
     return {
         "icd_classifier_healthcheck": icd_classifier_healthcheck.json()
-        , "disisease_token_classifier_healthcheck": disease_token_classifier_healthcheck.json()
+        ,"disisease_token_classifier_healthcheck": disease_token_classifier_healthcheck.json()
     }
