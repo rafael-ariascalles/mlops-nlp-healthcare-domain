@@ -1,24 +1,24 @@
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 
-def get_model_huggingface():
-    model = AutoTokenizer.from_pretrained("rjac/setfit-ICD10-L3")
-    tokenizer = AutoModelForSequenceClassification.from_pretrained("rjac/setfit-ICD10-L3")
-    model.save_pretrained("models/")
-    tokenizer.save_pretrained("models/")
-
+#def get_model_huggingface():
+#    model = AutoTokenizer.from_pretrained("rjac/setfit-ICD10-L3")
+#    tokenizer = AutoModelForSequenceClassification.from_pretrained("rjac/setfit-ICD10-L3")
+#    model.save_pretrained("models/")
+#    tokenizer.save_pretrained("models/")
+s
 
 class PyTorch_to_TorchScript(torch.nn.Module):
     def __init__(self):
         super(PyTorch_to_TorchScript, self).__init__()
-        self.model = AutoModelForSequenceClassification.from_pretrained('models/', return_dict=False)
+        self.model = AutoModelForSequenceClassification.from_pretrained('rjac/setfit-ICD10-L3', return_dict=False)
     def forward(self, data, attention_mask=None):
         return self.model(data, attention_mask)
 
 
 def get_model_triton():
     
-    tokenizer = AutoTokenizer.from_pretrained('models/')
+    tokenizer = AutoTokenizer.from_pretrained('rjac/setfit-ICD10-L3')
     text = "subarachnoid hemorrhage scalp laceration service: surgery major surgical or invasive"
     
     input_ids = tokenizer.encode(text, return_tensors='pt', max_length=768, padding='max_length', truncation=True)
@@ -60,7 +60,7 @@ output {
 
 
 if __name__ == "__main__":
-    get_model_huggingface()
+    #get_model_huggingface()
     get_model_triton()
     get_config()
     

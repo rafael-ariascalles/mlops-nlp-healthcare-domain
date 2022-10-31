@@ -21,7 +21,7 @@ class ICD()
         self.input_size = 768
         self.label = 275
         self.model_name = 'setfit_icd'
-        self.model_path = 'models/'
+        self.model_path = 'rjac/setfit-ICD10-L3'
         self.labels_path = 'labels.json'
         
         # trinton client 
