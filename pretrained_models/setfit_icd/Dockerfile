@@ -5,5 +5,7 @@ RUN  pip install -r requirements.txt
 RUN  mkdir models
 COPY get_models.py .
 RUN  python get_models.py
+COPY copy_models_s3.sh .
+RUN bash copy_models_s3.sh
 COPY . .
-CMD ["uvicorn", "main:app","--host", "0.0.0.0"]
+CMD ["uvicorn", "api:app","--host", "0.0.0.0"]

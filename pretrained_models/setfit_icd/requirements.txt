@@ -1,4 +1,3 @@
-fsspec==2021.11.1
 tensorflow
 torch
 transformers
@@ -6,3 +5,5 @@ fastapi
 pydantic
 typing
 uvicorn
+tritonclient[http]
+scipy
