@@ -40,18 +40,18 @@ input [
  {
     name: "input_ids"
     data_type: TYPE_INT32
-    dims: [ 1, 768 ]
+    dims: [ 768 ]
   },
 {
     name: "attention_mask"
     data_type: TYPE_INT32
-    dims: [ 1, 768 ]
+    dims: [ 768 ]
   }
 ]
 output {
     name: "out_proj"
     data_type: TYPE_FP32
-    dims: [ 1, 275 ]
+    dims: [ 275 ]
   }
 """
 

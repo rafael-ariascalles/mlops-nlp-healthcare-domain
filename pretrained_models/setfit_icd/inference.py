@@ -26,6 +26,8 @@ class ICD():
         
         # trinton client 
         self.triton_client = tritonhttpclient.InferenceServerClient(url=triton_url, verbose=False)
+        self.model_metadata = self.triton_client.get_model_metadata(model_name=self.model_name, model_version=self.model_version)
+        self.model_config = self.triton_client.get_model_config(model_name=self.model_name, model_version=self.model_version)
     
     
     def predict(self, text, num_labels=5):
