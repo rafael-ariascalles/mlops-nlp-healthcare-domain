@@ -44,7 +44,7 @@ class ICD():
         response_list = []
         for label, prob in zip(top_predictions, probs):
             score = round(prob.item()*100, 2)
-        response_list.append(f'{label}: {score}% Confidence')
+            response_list.append(f'{label}: {score}% Confidence')
     
         response_list.reverse()  
         return response_list  
