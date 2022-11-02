@@ -4,7 +4,7 @@ services:
 
   triton:
     image: 'nvcr.io/nvidia/tritonserver:22.06-py3'
-    env_file: .env
+    env_file: ../.env
     ports:
       - '8001:8000'
     command: ['tritonserver', '--model-repository=s3://nlp-medical-biller-group-datasets-mlo4/models']
