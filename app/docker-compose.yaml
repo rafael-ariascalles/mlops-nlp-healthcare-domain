@@ -6,7 +6,9 @@ services:
     image: 'nvcr.io/nvidia/tritonserver:22.06-py3'
     env_file: ../.env
     ports:
-      - '8001:8000'
+      - "8000:8000"
+      - "8001:8001"
+      - "8002:8002"
     command: ['tritonserver', '--model-repository=s3://nlp-medical-biller-group-datasets-mlo4/models']
 
   icd-group-service:
@@ -22,7 +24,7 @@ services:
   main:
     build: .
     ports:
-      - "8000:8000"
+      - "8003:8000"
     environment:
       - URL_ICD_SERVICE=http://icd-group-service:8000/
    #   - URl_DISEASE_SERVICE=http://disease-ner-service:8000/
@@ -30,3 +32,6 @@ services:
       - icd-group-service
    #   - disease-ner-service
       - triton
+
+
+#docker run -p8000:8000 -p8001:8001 -p8002:8002 --env-file ../../.env -p8000:8000 -p8001:8001 -p8002:8002 --rm --net=host nvcr.io/nvidia/tritonserver:22.06-py3 tritonserver --model-repository=s3://nlp-medical-biller-group-datasets-mlo4/models
