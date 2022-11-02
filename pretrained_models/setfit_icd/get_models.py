@@ -1,12 +1,13 @@
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
+import os
 
 #def get_model_huggingface():
 #    model = AutoTokenizer.from_pretrained("rjac/setfit-ICD10-L3")
 #    tokenizer = AutoModelForSequenceClassification.from_pretrained("rjac/setfit-ICD10-L3")
 #    model.save_pretrained("models/")
 #    tokenizer.save_pretrained("models/")
-s
+
 
 class PyTorch_to_TorchScript(torch.nn.Module):
     def __init__(self):
@@ -28,6 +29,11 @@ def get_model_triton():
     
     pt_model = PyTorch_to_TorchScript().eval()
     traced_script_module = torch.jit.trace(pt_model, (input_ids, mask))
+    
+    path = os.path.join(os.getcwd(), 'models', '1')
+    if not os.path.exists(path):
+        os.makedirs(path)
+        
     traced_script_module.save('models/1/model.pt')
 
 
