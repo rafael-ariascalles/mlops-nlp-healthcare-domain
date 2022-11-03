@@ -25,6 +25,7 @@ async def root():
 @app.post("/disease_extraction", tags=['Disease NER'])
 async def disease_extraction(input_text: ServiceInput):
     response = service(input_text.sentences)
-    response = [d["word"] for d in response]
+    print(response)
+    response = [[d["word"] for d in list_ents] for list_ents in response]
     response_object = ServiceResponse(diseases=response)
     return response_object

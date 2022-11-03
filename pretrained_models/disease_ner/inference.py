@@ -4,16 +4,26 @@ import numpy as np
 from typing import List, Optional, Tuple, Union
 import torch
 
+
+class AggregationStrategy:
+    """All the valid aggregation strategies for TokenClassificationPipeline"""
+
+    NONE = "none"
+    SIMPLE = "simple"
+    FIRST = "first"
+    AVERAGE = "average"
+    MAX = "max"
+
 class TritonTokenClassificationPipeline(TokenClassificationPipeline):
 
-    def __init__(self,triton_url=None,model_name=None,model_version="1",tokenizer=None):    
+    def __init__(self,triton_url=None,triton_model_name=None,model_version="1",tokenizer=None):    
         #super().__init__(*args, **kwargs)
         self.tokenizer = tokenizer
         self.framework = 'pt'
         self.id2label = {0: 'O', 1: 'B-Disease', 2: 'I-Disease'}
         self.aggregation_strategy = "simple"
         self.triton_client = httpclient.InferenceServerClient(url=triton_url)
-        self.model_name = model_name
+        self.model_name = triton_model_name
         self.model_version = model_version
         
     def cast_tritonhttpclient(self,model_inputs):
