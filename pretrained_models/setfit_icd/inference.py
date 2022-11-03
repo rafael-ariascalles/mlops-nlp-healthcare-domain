@@ -4,8 +4,7 @@ import numpy as np
 import json
 from scipy.special import softmax
 
-#docker run --env-file .env -p8000:8000 -p8001:8001 -p8002:8002 --rm --net=host nvcr.io/nvidia/tritonserver:22.06-py3 tritonserver --model-repository=s3://nlp-medical-biller-group-datasets-mlo4/models
-
+#docker run --env-file ../../.env -p8000:8000 -p8001:8001 -p8002:8002 --rm --net=host nvcr.io/nvidia/tritonserver:22.06-py3 tritonserver --model-repository=s3://nlp-medical-biller-group-datasets-mlo4/models
 
 class ICD():
     

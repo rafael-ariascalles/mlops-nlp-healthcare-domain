@@ -2,11 +2,17 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 import os
 
-#def get_model_huggingface():
-#    model = AutoTokenizer.from_pretrained("rjac/setfit-ICD10-L3")
-#    tokenizer = AutoModelForSequenceClassification.from_pretrained("rjac/setfit-ICD10-L3")
-#    model.save_pretrained("models/")
-#    tokenizer.save_pretrained("models/")
+def get_model_huggingface():
+    
+    model = AutoTokenizer.from_pretrained("rjac/setfit-ICD10-L3")
+    tokenizer = AutoModelForSequenceClassification.from_pretrained("rjac/setfit-ICD10-L3")
+    
+    path = os.path.join(os.getcwd(), 'models', '1')
+    if not os.path.exists(path):
+        os.makedirs(path)
+    
+    model.save_pretrained("models/")
+    tokenizer.save_pretrained("models/")
 
 
 class PyTorch_to_TorchScript(torch.nn.Module):
@@ -66,7 +72,6 @@ output {
 
 
 if __name__ == "__main__":
-    #get_model_huggingface()
     get_model_triton()
     get_config()
     
