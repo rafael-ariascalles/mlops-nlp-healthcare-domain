@@ -10,3 +10,4 @@ datasets
 seqeval
 uvicorn
 fastapi
+tritonclient[http]
