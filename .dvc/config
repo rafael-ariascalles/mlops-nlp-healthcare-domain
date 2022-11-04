@@ -2,3 +2,5 @@
     remote = bucket
 ['remote "bucket"']
     url = s3://nlp-medical-biller-group-datasets-mlo4/datasets/
+['remote "origin"']
+    url = https://dagshub.com/rafael-ariascalles/mlops-nlp-healthcare-domain.dvc

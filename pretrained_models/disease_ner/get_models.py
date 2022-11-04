@@ -34,12 +34,12 @@ input [
     {
         name: "input__0"
         data_type: TYPE_INT32
-        dims: [ """+ str(MODEL_INPUT) +""" ]
+        dims: [ -1 ]
     },
     {
         name: "input__1"
         data_type: TYPE_INT32
-        dims: [ """+ str(MODEL_INPUT) +""" ]
+        dims: [ -1 ]
     }
 ]
 output {
