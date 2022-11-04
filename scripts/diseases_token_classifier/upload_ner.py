@@ -43,10 +43,10 @@ def create_dataset(path,id_prefix,mapper = None):
         return df
 
 if __name__ == "__main__":   
-    train_bc5cdr = create_dataset('../datasets/BC5CDR-disease-train_dev.tsv',"BC5CDR-",mapper)
-    train_ncbi = create_dataset('../datasets/NCBI-disease-train_dev.tsv',"NCBI-",mapper)
-    test_bc5cdr = create_dataset('../datasets/BC5CDR-disease-test.tsv',"BC5CDR-",mapper)
-    test_ncbi = create_dataset('../datasets/NCBI-disease-test.tsv',"NCBI-",mapper)
+    train_bc5cdr = create_dataset('../../datasets/BC5CDR-disease-train_dev.tsv',"BC5CDR-",mapper)
+    train_ncbi = create_dataset('../../datasets/NCBI-disease-train_dev.tsv',"NCBI-",mapper)
+    test_bc5cdr = create_dataset('../../datasets/BC5CDR-disease-test.tsv',"BC5CDR-",mapper)
+    test_ncbi = create_dataset('../../datasets/NCBI-disease-test.tsv',"NCBI-",mapper)
 
     train_dataframe = pd.concat([train_bc5cdr,train_ncbi])
     test_dataframe = pd.concat([test_bc5cdr,test_ncbi])
@@ -55,8 +55,8 @@ if __name__ == "__main__":
     test_dataframe = dataframe2dataset(test_dataframe,labels_name)
 
     #save jsonl
-    train_dataframe.to_json("../datasets/ner_train.jsonl",orient="records",lines=True)
-    test_dataframe.to_json("../datasets/ner_test.jsonl",orient="records",lines=True)
-    print(os.getenv("TOKEN_HF"))
+    train_dataframe.to_json("../../datasets/ner_train.jsonl",orient="records",lines=True)
+    test_dataframe.to_json("../../datasets/ner_test.jsonl",orient="records",lines=True)
+
     ds = DatasetDict({"train":train_dataframe,"test":test_dataframe})
     ds.push_to_hub("rjac/biobert-ner-diseases-dataset",max_shard_size="250MB",private=False,token=os.getenv("TOKEN_HF"))
