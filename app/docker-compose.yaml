@@ -23,7 +23,7 @@ services:
       - "8051:8000"
   disease-ner-service:
     build: ../pretrained_models/disease_ner
-    container_name: disease_ner
+    container_name: ner
     ports:
       - "8052:8000"
   main:
