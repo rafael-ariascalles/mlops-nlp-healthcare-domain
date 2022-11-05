@@ -5,7 +5,7 @@ from inference import ICD
 
 
 
-app = FastAPI(title='SETFIT: Top 5 ICD Group Prediction')
+app = FastAPI(title='BERT: Top 5 ICD Group Prediction')
 
 
 class ServiceInput(BaseModel):
@@ -21,7 +21,7 @@ async def root():
     return {"message": "Service is online."}
 
 
-@app.post("/icd_group_prediction", tags=['SETFIT: Top 5 ICD Group Prediction'])
+@app.post("/icd_group_prediction", tags=['BERT: Top 5 ICD Group Prediction'])
 async def icd_prediction(input: ServiceInput):
     
     # run model and get top 5 predictions 

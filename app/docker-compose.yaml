@@ -11,25 +11,27 @@ services:
       - "8002:8002"
     command: ['tritonserver', '--model-repository=s3://nlp-medical-biller-group-datasets-mlo4/models']
 
-  icd-group-service:
+  setfit_icd_service:
     build: ../pretrained_models/setfit_icd
-    container_name: icd
+    container_name: setfit_icd
     ports:
       - "8050:8000"
-  #disease-ner-service:
-  #  build: ../pretrained_models/disease_ner/
-  #  container_name: disease
-  #  ports:
-  #    - "8051:8000"
+  bert_icd_service:
+    build: ../pretrained_models/bert_icd
+    container_name: bert_icd
+    ports:
+      - "8051:8000"
   main:
     build: .
     ports:
       - "8003:8000"
     environment:
-      - URL_ICD_SERVICE=http://icd-group-service:8000/
+      - URL_SETFIT_ICD_SERVICE=http://setfit_icd_service:8000/
+      - URL_BERT_ICD_SERVICE=http://bert_icd_service:8000/
    #   - URl_DISEASE_SERVICE=http://disease-ner-service:8000/
     depends_on:
-      - icd-group-service
+      - setfit_icd_service
+      - bert_icd_service
    #   - disease-ner-service
       - triton
       
