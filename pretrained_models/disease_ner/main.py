@@ -8,9 +8,9 @@ app = FastAPI(title='Disease NER')
 
 MODEL_VERSION = "rjac/biobert-ner-diseases-model"
 tokenizer = AutoTokenizer.from_pretrained(MODEL_VERSION)
-triton_url = "44.202.50.226:8000"
+triton_url = 'triton:8000'
 triton_model_name ="ner"
-service = TritonTokenClassificationPipeline(triton_url,triton_model_name ="ner",tokenizer=tokenizer)
+service = TritonTokenClassificationPipeline(triton_url=triton_url,triton_model_name=triton_model_name,tokenizer=tokenizer)
 
 class ServiceInput(BaseModel):
     sentences: List[str]

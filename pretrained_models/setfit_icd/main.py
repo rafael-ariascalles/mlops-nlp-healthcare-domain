@@ -4,7 +4,6 @@ from typing import List
 from inference import ICD
 
 
-
 app = FastAPI(title='SETFIT: Top 5 ICD Group Prediction')
 
 
