@@ -21,6 +21,11 @@ services:
     container_name: bert_icd
     ports:
       - "8051:8000"
+  disease-ner-service:
+    build: ../pretrained_models/disease_ner
+    container_name: ner
+    ports:
+      - "8052:8000"
   main:
     build: .
     ports:
@@ -28,11 +33,11 @@ services:
     environment:
       - URL_SETFIT_ICD_SERVICE=http://setfit_icd_service:8000/
       - URL_BERT_ICD_SERVICE=http://bert_icd_service:8000/
-   #   - URl_DISEASE_SERVICE=http://disease-ner-service:8000/
+      - URl_DISEASE_SERVICE=http://disease-ner-service:8000/
     depends_on:
       - setfit_icd_service
       - bert_icd_service
-   #   - disease-ner-service
+      - disease-ner-service
       - triton
       
 
