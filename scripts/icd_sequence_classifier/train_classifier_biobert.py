@@ -19,7 +19,12 @@ import mlflow
 from dotenv import load_dotenv
 load_dotenv()
 
-tokenizer = BertTokenizer.from_pretrained("dmis-lab/biobert-v1.1")
+TOKEN_HF = os.getenv("TOKEN_HF")
+PRETRAINED_MODEL_NAME = os.getenv("PRETRAINED_MODEL_NAME")
+FINETUNED_MODEL_NAME = os.getenv("FINETUNED_MODEL_NAME")
+
+model_version = os.getenv("PRETRAINED_MODEL_NAME")
+tokenizer = BertTokenizer.from_pretrained()
 
 def compute_metrics(eval_pred):
     logits_, labels_ = eval_pred
@@ -97,6 +102,14 @@ def main():
     trainer.train()
     mlflow.end_run()    
     trainer.save_model("model/icd_biobert")
+
+    trainer.save_model("model")
+
+    tokenizer_final = BertTokenizer.from_pretrained("model")
+    model_final = BertForSequenceClassification.from_pretrained("model")    
+    
+    model_final.push_to_hub("biobert-ner-diseases-model",use_auth_token=TOKEN_HF)
+    tokenizer_final.push_to_hub("biobert-ner-diseases-model",use_auth_token=TOKEN_HF)
 
 if __name__ == "__main__":
     main()
