@@ -5,6 +5,9 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
+TOKEN_HF = os.getenv("TOKEN_HF")
+
+
 mapper = {"O":0,"B":1,"I":2}
 labels_name = ["O","B-Disease","I-Disease"]
 
@@ -59,4 +62,4 @@ if __name__ == "__main__":
     test_dataframe.to_json("../../datasets/ner_test.jsonl",orient="records",lines=True)
 
     ds = DatasetDict({"train":train_dataframe,"test":test_dataframe})
-    ds.push_to_hub("rjac/biobert-ner-diseases-dataset",max_shard_size="250MB",private=False,token=os.getenv("TOKEN_HF"))
+    ds.push_to_hub("rjac/biobert-ner-diseases-dataset",max_shard_size="250MB",private=False,token=TOKEN_HF)

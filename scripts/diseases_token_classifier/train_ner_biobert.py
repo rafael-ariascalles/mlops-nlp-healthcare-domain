@@ -8,13 +8,19 @@ import mlflow
 from dotenv import load_dotenv
 load_dotenv()
 
-model_checkpoint = "dmis-lab/biobert-base-cased-v1.1"
+TOKEN_HF = os.getenv("TOKEN_HF")
+PRETRAINED_MODEL_NAME = os.getenv("PRETRAINED_MODEL_NAME")
+FINETUNED_MODEL_NAME = os.getenv("FINETUNED_MODEL_NAME")
+
+model_checkpoint = PRETRAINED_MODEL_NAME
 tokenizer = AutoTokenizer.from_pretrained(model_checkpoint)
 metric = load_metric("seqeval")
 
 raw_datasets = load_dataset("rjac/biobert-ner-diseases-dataset")
 ner_feature = raw_datasets["train"].features["tags"]
 label_names = ner_feature.feature.names
+
+
 
 def align_labels_with_tokens(labels, word_ids):
     
@@ -88,8 +94,6 @@ def main():
     id2label = {str(i): label for i, label in enumerate(label_names)}
     label2id = {v: k for k, v in id2label.items()}
 
-    os.environ["MLFLOW_EXPERIMENT_NAME"] = "diseases_biobert"
-
     model = AutoModelForTokenClassification.from_pretrained(
         model_checkpoint,
         id2label=id2label,
@@ -130,8 +134,8 @@ def main():
     tokenizer_final = AutoTokenizer.from_pretrained("model")
     model_final = AutoModelForTokenClassification.from_pretrained("model")
     
-    model_final.push_to_hub("biobert-ner-diseases-model",use_auth_token=os.getenv("TOKEN_HF"))
-    tokenizer_final.push_to_hub("biobert-ner-diseases-model",use_auth_token=os.getenv("TOKEN_HF"))
+    model_final.push_to_hub("biobert-ner-diseases-model",use_auth_token=TOKEN_HF)
+    tokenizer_final.push_to_hub("biobert-ner-diseases-model",use_auth_token=TOKEN_HF)
     
 if __name__ == "__main__":
     main()
