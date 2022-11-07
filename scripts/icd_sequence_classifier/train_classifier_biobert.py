@@ -108,8 +108,8 @@ def main():
     tokenizer_final = BertTokenizer.from_pretrained("model")
     model_final = BertForSequenceClassification.from_pretrained("model")    
     
-    model_final.push_to_hub("biobert-ner-diseases-model",use_auth_token=TOKEN_HF)
-    tokenizer_final.push_to_hub("biobert-ner-diseases-model",use_auth_token=TOKEN_HF)
+    model_final.push_to_hub(FINETUNED_MODEL_NAME,use_auth_token=TOKEN_HF)
+    tokenizer_final.push_to_hub(FINETUNED_MODEL_NAME,use_auth_token=TOKEN_HF)
 
 if __name__ == "__main__":
     main()
