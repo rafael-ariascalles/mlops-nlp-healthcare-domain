@@ -11,3 +11,5 @@ datasets
 python-dotenv
 mlflow
 dvc
+json
+sklearn
