@@ -25,7 +25,8 @@ async def root():
 async def icd_prediction(input: ServiceInput):
     
     # run model and get top 5 predictions 
-    model = ICD(triton_url='triton:8000')
+    model_path = 'rjac/biobert-ICD10-L3-mimic'
+    model = ICD(triton_url='triton:8000', model_path=model_path)
     response = model.predict(input.clinical_note, num_labels=5)
     response_object = ServiceResponse(icd_group=response)
     return response_object

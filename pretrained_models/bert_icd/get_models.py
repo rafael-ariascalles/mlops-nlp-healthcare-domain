@@ -4,8 +4,8 @@ import os
 
 def get_model_huggingface():
     
-    model = AutoTokenizer.from_pretrained("rjac/biobert-ICD10-L3")
-    tokenizer = AutoModelForSequenceClassification.from_pretrained("rjac/biobert-ICD10-L3")
+    model = AutoTokenizer.from_pretrained("rjac/biobert-ICD10-L3-mimic")
+    tokenizer = AutoModelForSequenceClassification.from_pretrained("rjac/biobert-ICD10-L3-mimic")
     
     model.save_pretrained("models/")
     tokenizer.save_pretrained("models/")
@@ -14,14 +14,14 @@ def get_model_huggingface():
 class PyTorch_to_TorchScript(torch.nn.Module):
     def __init__(self):
         super(PyTorch_to_TorchScript, self).__init__()
-        self.model = AutoModelForSequenceClassification.from_pretrained('rjac/biobert-ICD10-L3', return_dict=False)
+        self.model = AutoModelForSequenceClassification.from_pretrained('rjac/biobert-ICD10-L3-mimic', return_dict=False)
     def forward(self, data, attention_mask=None):
         return self.model(data, attention_mask)
 
 
 def get_model_triton():
     
-    tokenizer = AutoTokenizer.from_pretrained('rjac/biobert-ICD10-L3')
+    tokenizer = AutoTokenizer.from_pretrained('models/')
     text = "subarachnoid hemorrhage scalp laceration service: surgery major surgical or invasive"
     
     input_ids = tokenizer.encode(text, return_tensors='pt', max_length=512, padding='max_length', truncation=True)
@@ -32,7 +32,7 @@ def get_model_triton():
     pt_model = PyTorch_to_TorchScript().eval()
     traced_script_module = torch.jit.trace(pt_model, (input_ids, mask))
         
-    traced_script_module.save('models/1/model.pt')
+    traced_script_module.save('models/')
 
 
 def get_config():

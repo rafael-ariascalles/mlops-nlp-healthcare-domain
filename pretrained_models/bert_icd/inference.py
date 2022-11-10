@@ -8,7 +8,7 @@ from scipy.special import softmax
 
 class ICD():
     
-    def __init__(self, triton_url):
+    def __init__(self, triton_url, model_path):
         """
         Instantiate ICD model class with pretrained model paths
         """        
@@ -20,7 +20,7 @@ class ICD():
         self.input_size = 512
         self.label = 275
         self.model_name = 'bert_icd'
-        self.model_path = 'rjac/biobert-ICD10-L3'
+        self.model_path = model_path
         self.labels_path = 'labels.json'
         
         # trinton client 
