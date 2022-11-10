@@ -1,0 +1,7 @@
+pandas 
+numpy
+tensorflow
+transformers
+uvicorn
+fastapi
+tritonclient[http]
