@@ -1,0 +1,7 @@
+transformers
+fastapi
+pydantic
+typing
+uvicorn
+tritonclient[http]
+scipy

@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from transformers import pipeline,AutoTokenizer,AutoModelForTokenClassification
+from transformers import AutoTokenizer
 from pydantic import BaseModel
 from typing import List
 from inference import TritonTokenClassificationPipeline
