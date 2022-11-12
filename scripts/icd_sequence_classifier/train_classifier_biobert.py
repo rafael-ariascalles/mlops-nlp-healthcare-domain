@@ -1,6 +1,6 @@
 import json 
 import pandas as pd
-from datasets import load_dataset,Dataset
+from datasets import load_dataset,Dataset,load_from_disk
 from sklearn import metrics
 import numpy as np
 import re
@@ -20,7 +20,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 TOKEN_HF = os.getenv("TOKEN_HF")
-PRETRAINED_MODEL_NAME = os.getenv("PRETRAINED_MODEL_NAME")
+PRETRAINED_MODEL_NAME = os.getenv("PRETRAINED_MODEL_NAME")  ### THIS NEEDS TO BE PULLED FROM OLDER EXPERIMENT; ADD IN EVAL AGAINST GOLD STANDARD +1 timestep
 FINETUNED_MODEL_NAME = os.getenv("FINETUNED_MODEL_NAME")
 
 model_checkpoint = PRETRAINED_MODEL_NAME
@@ -42,10 +42,10 @@ def tokenize_text(batch):
     return tokenizer(texts,truncation=True)
 
 def load_data(path):
-    dataset = load_dataset(path,split="train")
+    dataset = load_dataset("json",data_files=path, split="train")
     dataset = dataset.rename_column("ICD10_GROUP_DESCRIPTION","labels")
     dataset = dataset.class_encode_column("labels")
-    dataset = dataset.train_test_split(test_size=0.2,seed=6654)
+    dataset = dataset.train_test_split(test_size=0.2,seed=7524)
     return dataset
 
 def main():
@@ -54,7 +54,7 @@ def main():
     parser.add_argument("-n", "--dataset_num", type=int, help="Indicate dataset cut to train on. Dataset 0 is the icd10 dataset, Dataset 1-5 is MIMIC III", required=True, choices=range(0, 6))
     args = parser.parse_args()
     
-    path=f'rjac/biobert_pred_dataset_{args.dataset_num}'
+    path=f"../../datasets/training_data/train_dataset_{args.dataset_num}.jsonl"
     dataset = load_data(path=path)
 
     tokenized_dataset = dataset.map(tokenize_text,remove_columns=['TEXT', 'ICD10_L3_DESCRIPTION'])

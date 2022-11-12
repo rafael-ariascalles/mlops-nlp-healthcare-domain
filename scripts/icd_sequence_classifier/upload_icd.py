@@ -16,7 +16,6 @@ def load_datasets():
         df.to_json(f"../../datasets/training_data/train_dataset_{dataset_num}.jsonl",orient="records",lines=True)
         dataset = load_dataset("json",data_files=f"../../datasets/training_data/train_dataset_{dataset_num}.jsonl", split="train")
         dataset = dataset.train_test_split(test_size=0.2,seed=7524)
-        dataset.save_to_disk(f"../../datasets/training_data/biobert_training_dataset_{dataset_num}")
         dataset_eval = dataset['test']
 
         if dataset_num == 0:
@@ -26,7 +25,6 @@ def load_datasets():
             dataset_eval_prior = load_from_disk(f"../../datasets/training_data/biobert_eval_dataset_{dataset_num-1}")
             dataset_eval_final = concatenate_datasets([dataset_eval, dataset_eval_prior])                                 
             dataset_eval_final.save_to_disk(f"../../datasets/training_data/biobert_eval_dataset_{dataset_num}")
-       
     
 
 
