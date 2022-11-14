@@ -1,6 +1,6 @@
 # mlops-nlp-healthcare-domain
 
-Problem: Medical Biller ICD Code helper
+Virtual Assistant Medical Biller 
 
 This is a simple NLP problem where we are trying to predict the ICD code for a given medical biller description. for this task we are using two type of Machine Learning models. 
 1) a Classification model that will predict the ICD code for a given medical biller description.
@@ -8,13 +8,13 @@ This is a simple NLP problem where we are trying to predict the ICD code for a g
 
 ## Dataset
 
-the MIMIC-III dataset and the event note will be serve as the biller description.
-for the Token Classification model it will be using the NC5CDB and 
+MIMIC-III dataset for ICD Prediction
+NC5CDB for Token Classification  
 
 ## Pre Trained Models
 
     Masked language model - BioBert
-    BioDischarge Classification - ICD9
+    BioDischarge Classification - ICD10
 
 ## Data Versioning
 
@@ -22,16 +22,15 @@ this project is using DVC to version the data and the models and S3 bucket to ma
 
 ## Model Versioning
 
-TBD
+MlFlow 
 
 ## Model Serving
 
-Kubernetes, Docker and FastAPI
+Kubernetes, Triton, Docker and FastAPI
 
 ## Model Monitoring
 
-Graphana, Prometheus and Loki (TBD)
-
+Graphana, Prometheus 
 
 ## CI/CD
 
